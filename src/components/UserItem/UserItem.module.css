@@ -1,0 +1,31 @@
+.user {
+    padding-top: 16px;
+}
+
+.user_discription {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.user_photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.login {
+    cursor: pointer;
+}
+
+.photo_discription {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+        gap: 4px;
+}
+
+.big {
+    font-weight: 600;
+}

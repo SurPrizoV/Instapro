@@ -19,6 +19,11 @@
     cursor: pointer;
 }
 
+.publication {
+    width: 500px;
+    height: 500px;
+}
+
 .photo_discription {
     display: flex;
     flex-direction: row;

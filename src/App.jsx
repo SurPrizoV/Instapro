@@ -1,13 +1,9 @@
 import './App.css';
-import { Header } from "./components/Header/Header";
-import { UserItem } from './components/UserItem/UserItem';
+import { Main } from './pages/Main/Main';
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <UserItem/>
-    </div>
+    <Main/>
   );
 }
 

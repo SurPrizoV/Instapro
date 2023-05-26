@@ -1,0 +1,47 @@
+.registration {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.logo {
+  cursor: pointer;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  gap: 2px;
+  padding-bottom: 12px;
+}
+
+.input {
+    border: none;
+    border-bottom: 0.3px solid rgb(194, 193, 193);
+    outline: none;
+    padding: 0 6px;
+}
+
+.button {
+  padding: 8px;
+  background-color: #cecece;
+  cursor: pointer;
+  transition: 0.5s;
+  border: none;
+  border-radius: 4px;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  background-color: #afafaf;
+  box-shadow: 8px 0px 24px #d6d5d5;
+}

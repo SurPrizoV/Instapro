@@ -1,8 +1,11 @@
 import { useState } from "react";
 import s from "./SignUp.module.css";
 
-export const SignUp = ({setLogin, setPassword, registration, setRegistration, setModalActive}) => {
+export const SignUp = ({registration, setRegistration, setModalActive}) => {
   const [signUp, setSignUp] = useState(false);
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const onSignUpChange = () => {
     signUp ? setSignUp(false) : setSignUp(true);

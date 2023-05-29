@@ -4,7 +4,7 @@ import s from "./Header.module.css";
 import { SignUp } from "../../pages/SignUp/SignUp";
 import { Registration } from "../../pages/Registration/Registration";
 
-export const Header = ({ setLogin, setPassword }) => {
+export const Header = () => {
   const [modalActive, setModalActive] = useState(false);
   const [registration, setRegistration] = useState(false);
   return (
@@ -16,14 +16,10 @@ export const Header = ({ setLogin, setPassword }) => {
       <Modal active={modalActive} setActive={setModalActive}>
         {registration ? (
           <Registration
-            setLogin={setLogin}
-            setPassword={setPassword}
             setModalActive={setModalActive}
           />
         ) : (
           <SignUp
-            setLogin={setLogin}
-            setPassword={setPassword}
             registration={registration}
             setRegistration={setRegistration}
             setModalActive={setModalActive}

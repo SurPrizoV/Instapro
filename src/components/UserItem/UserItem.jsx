@@ -3,6 +3,7 @@ import { IoHeartOutline } from "react-icons/io5";
 import { IoHeartSharp } from "react-icons/io5";
 import { useState, useEffect } from 'react';
 import { formatDistance } from "date-fns";
+import { ru } from 'date-fns/esm/locale';
 
 export const UserItem = () => {
     const [liked, setLiked] = useState(false);
@@ -49,7 +50,9 @@ export const UserItem = () => {
                     <span className={s.big}>
                       Нравится : {post.likes[0].name}{" "}
                     </span>{" "}
-                    и еще {post.likes.length - 1}
+                    {post.likes.length > 1
+                      ? `и еще ${post.likes.length - 1}`
+                      : ""}
                   </p>
                 )}
               </div>
@@ -57,7 +60,12 @@ export const UserItem = () => {
                 {post.user.login}
                 <span className={s.big}> {post.description}</span>
               </p>
-              <p>{formatDistance(new Date(Date.parse(post.createdAt)), new Date(), {addSuffix: true})}</p>
+              <p>
+                {formatDistance(new Date(post.createdAt), new Date(), {
+                  locale: ru,
+                  addSuffix: true,
+                })}
+              </p>
             </div>
           ))}
       </>

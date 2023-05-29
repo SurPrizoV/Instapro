@@ -20,7 +20,7 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
   padding-bottom: 12px;
 }
 
@@ -44,4 +44,22 @@
   transform: scale(1.03);
   background-color: #afafaf;
   box-shadow: 8px 0px 24px #d6d5d5;
+}
+
+.acc{
+  font-size: 12px;
+}
+
+.signin {
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.signin:hover {
+  transform: scale(1.03);
+}
+
+.hidden {
+  display: none;
 }

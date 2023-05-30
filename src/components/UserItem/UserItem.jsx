@@ -13,12 +13,10 @@ export const UserItem = (user) => {
     fetch(`https://webdev-hw-api.vercel.app/api/v1/prod/instapro`)
       .then((response) => response.json())
       .then((data) => setData(data));
-  }, []);
+  }, [user, liked]);
 
   const onLikedChange = async (id) => {
-    if (user.user._id) {
-      liked ? setLiked(false) : setLiked(true);
-
+    if (user.user !== "") {
       try {
         const responseLike = await fetch(
           `https://wedev-api.sky.pro/api/v1/prod/instapro/${id}/${
@@ -26,10 +24,13 @@ export const UserItem = (user) => {
           }`,
           {
             method: "POST",
+            headers: {
+              Authorization: `Bearer ${user.user}`,
+            },
           }
         );
         const result = await responseLike.json();
-        console.log(result);
+        setLiked(result.post.isLiked);
       } catch (error) {
         console.error("Ошибка:", error);
       }
@@ -37,6 +38,9 @@ export const UserItem = (user) => {
       alert("Вы должны быть авторизованны.");
     }
   };
+
+  console.log(data);
+  console.log(user);
 
   return (
     <>

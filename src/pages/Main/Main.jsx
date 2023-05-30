@@ -4,7 +4,7 @@ import { UserItem } from "../../components/UserItem/UserItem";
 import s from "./Main.module.css";
 
 export const Main = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState('');
   
   return (
     <div className={s.main}>

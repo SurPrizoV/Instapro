@@ -17,7 +17,7 @@ export const SignUp = ({ signUp, setSignUp, registration, setRegistration, setMo
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      setUser(result.user);
+      setUser(result.user.token);
       signUp ? setSignUp(false) : setSignUp(true);
       setModalActive(false);
     } catch (error) {

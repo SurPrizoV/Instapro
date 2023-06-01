@@ -17,6 +17,7 @@ export const UserItem = (user) => {
 
   const onLikedChange = async (id) => {
     if (user.user !== "") {
+
       try {
         const responseLike = await fetch(
           `https://wedev-api.sky.pro/api/v1/prod/instapro/${id}/${
@@ -25,8 +26,8 @@ export const UserItem = (user) => {
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${user.user}`,
-            },
+              "Authorization" : `Bearer ${user.user}`,
+            }
           }
         );
         const result = await responseLike.json();
@@ -38,9 +39,6 @@ export const UserItem = (user) => {
       alert("Вы должны быть авторизованны.");
     }
   };
-
-  console.log(data);
-  console.log(user);
 
   return (
     <>

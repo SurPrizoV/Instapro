@@ -10,9 +10,12 @@ export const UserItem = (user) => {
   const [data, setData] = useState({ posts: [] });
 
   useEffect(() => {
-    fetch(`https://webdev-hw-api.vercel.app/api/v1/prod/instapro`)
+    fetch(`https://webdev-hw-api.vercel.app/api/v1/prod/instapro`, 
+    {headers: user.user ? {
+      "Autorization" : `Bearer ${user.user}`,
+    }: {}})
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => {setData(data)});
   }, [user, liked]);
 
   const onLikedChange = async (id) => {

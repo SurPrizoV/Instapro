@@ -4,14 +4,14 @@ import s from "./Header.module.css";
 import { SignUp } from "../../pages/SignUp/SignUp";
 import { Registration } from "../../pages/Registration/Registration";
 
-export const Header = ({setUser}) => {
+export const Header = ({ setUser }) => {
   const [modalActive, setModalActive] = useState(false);
   const [registration, setRegistration] = useState(false);
   const [signUp, setSignUp] = useState(false);
 
   const onSignOutChange = () => {
     window.location.reload();
-  }
+  };
 
   return (
     <div className={s.header}>

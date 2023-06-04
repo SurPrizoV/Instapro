@@ -17,6 +17,7 @@ export const SignUp = ({ signUp, setSignUp, registration, setRegistration, setMo
         body: JSON.stringify(data),
       });
       const result = await response.json();
+      localStorage.setItem('userToken', result.user.token);
       setUser(result.user.token);
       signUp ? setSignUp(false) : setSignUp(true);
       setModalActive(false);
@@ -36,6 +37,7 @@ export const SignUp = ({ signUp, setSignUp, registration, setRegistration, setMo
   const onRegistrationChange = () => {
     registration ? setRegistration(false) : setRegistration(true);
   };
+  
   return (
     <div className={s.sign_up}>
       <p className={s.logo}>Instapro</p>

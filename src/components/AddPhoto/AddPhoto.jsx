@@ -2,56 +2,59 @@ import { useState } from "react";
 import s from "./AddPhoto.module.css";
 import { useEffect } from "react";
 
-export const AddPhoto = ({user}) => {
+export const AddPhoto = ({ user }) => {
   const [file, setFile] = useState("");
-  const [discription, setDiscription] = useState('');
-  const [url, setUrl] = useState('');
+  const [discription, setDiscription] = useState("");
+  const [url, setUrl] = useState("");
 
-  function onPostImage({ file }) {
+  const onImageUrlChange = async () => {
     const data = new FormData();
     data.append("file", file);
 
-    return fetch(" https://wedev-api.sky.pro/api/upload/image", {
+    await fetch(`https://wedev-api.sky.pro/api/upload/image`, {
       method: "POST",
       body: data,
+      mode: 'cors'
     })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data.fileUrl);
         setUrl(data.fileUrl);
+        console.log(url);
       })
       .catch((error) => {
-        console.error("Ошибка", error);
+        console.error("Ошибка:", error);
       });
-  }
+  };
 
   useEffect(() => {
-    onPostImage(file);
+    onImageUrlChange();
   }, [file]);
 
   const onSubmitChange = async (e) => {
     e.preventDefault();
     const data = {
-        description: discription,
-        imageUrl: url,
+      description: discription,
+      imageUrl: url,
     };
     try {
-        const response = await fetch('https://webdev-hw-api.vercel.app/api/v1/prod/instapro', 
+      const response = await fetch(
+        "https://webdev-hw-api.vercel.app/api/v1/prod/instapro",
         {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Authorization" : `Bearer ${user.user}`, 
-            }
-        });
-        const result = await response.json();
-        console.log(result);
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            Authorization: `Bearer ${user.user}`,
+          },
+        }
+      );
+      const result = await response.json();
+      console.log(result);
     } catch (error) {
-        console.log("Ошибка:", error);
+      console.log("Ошибка:", error);
     }
-  }
+  };
 
   return (
     <form className={s.add_photo}>
@@ -70,10 +73,12 @@ export const AddPhoto = ({user}) => {
         type="text"
         placeholder="Добавить описание"
         onChange={(e) => {
-            setDiscription(e.target.value);
+          setDiscription(e.target.value);
         }}
       />
-      <button className={s.button} onClick={()=>onSubmitChange()}>Добавить</button>
+      <button className={s.button} onClick={() => onSubmitChange()}>
+        Добавить
+      </button>
     </form>
   );
 };

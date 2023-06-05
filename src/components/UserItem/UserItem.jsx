@@ -11,7 +11,8 @@ export const UserItem = (user) => {
 
   useEffect(() => {
     fetch(`https://webdev-hw-api.vercel.app/api/v1/prod/instapro`, 
-    {headers: user.user ? {
+    {
+      headers: user.user ? {
       "Autorization" : `Bearer ${user.user}`,
     }: {}})
       .then((response) => response.json())

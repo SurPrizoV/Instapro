@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import s from "./Registration.module.css";
 
-export const Registration = ({ signUp, setSignUp, setRegistration, setModalActive, setUser }) => {
+export const Registration = ({
+  signUp,
+  setSignUp,
+  setRegistration,
+  setModalActive,
+  setUser,
+}) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -66,14 +72,16 @@ export const Registration = ({ signUp, setSignUp, setRegistration, setModalActiv
             disableButton ? `${s.hidden}` : `${s.button_in} ${s.button}`
           }
           onClick={() => onSignUpChange()}
-          disabled={disableButton}>
+          disabled={disableButton}
+        >
           {signUp ? "Зарегистрировался" : "Зарегистрироваться"}
         </button>
       </div>
       <p className={s.acc}>Есть аккаунт?</p>
       <p
         className={`${s.acc} ${s.signin}`}
-        onClick={() => onRegistrationChange()}>
+        onClick={() => onRegistrationChange()}
+      >
         Войти
       </p>
     </div>

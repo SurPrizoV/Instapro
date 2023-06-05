@@ -26,6 +26,7 @@ export const Registration = ({
       });
       const result = await response.json();
       setUser(result.user.token);
+      localStorage.setItem('userToken', result.user.token);
       signUp ? setSignUp(false) : setSignUp(true);
       setModalActive(false);
     } catch (error) {

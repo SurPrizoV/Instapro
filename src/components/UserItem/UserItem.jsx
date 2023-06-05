@@ -10,18 +10,24 @@ export const UserItem = (user) => {
   const [data, setData] = useState({ posts: [] });
 
   useEffect(() => {
-    fetch(`https://webdev-hw-api.vercel.app/api/v1/prod/instapro`, 
-    {
-      headers: user.user ? {
-      "Autorization" : `Bearer ${user.user}`,
-    }: {}})
+    fetch(`https://webdev-hw-api.vercel.app/api/v1/prod/instapro`, {
+      headers: user.user
+        ? {
+            Authorization: `Bearer ${user.user}`,
+          }
+        : {},
+    })
       .then((response) => response.json())
-      .then((data) => {setData(data)});
+      .then((data) => {
+        setData(data);
+        if (data && data.posts && data.posts.length > 0) {
+          setLiked(data.posts[0].isLiked);
+        }
+      });
   }, [user, liked]);
 
   const onLikedChange = async (id) => {
     if (user.user !== "") {
-
       try {
         const responseLike = await fetch(
           `https://wedev-api.sky.pro/api/v1/prod/instapro/${id}/${
@@ -30,14 +36,15 @@ export const UserItem = (user) => {
           {
             method: "POST",
             headers: {
-              "Authorization" : `Bearer ${user.user}`,
-            }
+              Authorization: `Bearer ${user.user}`,
+            },
           }
         );
         const result = await responseLike.json();
         setLiked(result.post.isLiked);
       } catch (error) {
         console.error("Ошибка:", error);
+        alert("Вы должны быть авторизованны.");
       }
     } else {
       alert("Вы должны быть авторизованны.");
@@ -63,7 +70,7 @@ export const UserItem = (user) => {
               alt="publication"
             />
             <div className={s.photo_discription}>
-              {liked ? (
+              {post.isLiked ? (
                 <IoHeartSharp onClick={() => onLikedChange(post.id)} />
               ) : (
                 <IoHeartOutline onClick={() => onLikedChange(post.id)} />

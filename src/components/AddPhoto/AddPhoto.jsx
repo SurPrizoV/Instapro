@@ -6,6 +6,7 @@ export const AddPhoto = ({ user }) => {
   const [file, setFile] = useState("");
   const [discription, setDiscription] = useState("");
   const [url, setUrl] = useState("");
+  const [disableButton, setDisableButton] = useState(true);
 
   const onImageUrlChange = async () => {
     const data = new FormData();
@@ -14,14 +15,12 @@ export const AddPhoto = ({ user }) => {
     await fetch(`https://wedev-api.sky.pro/api/upload/image`, {
       method: "POST",
       body: data,
-      mode: 'cors'
     })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         setUrl(data.fileUrl);
-        console.log(url);
       })
       .catch((error) => {
         console.error("Ошибка:", error);
@@ -32,8 +31,7 @@ export const AddPhoto = ({ user }) => {
     onImageUrlChange();
   }, [file]);
 
-  const onSubmitChange = async (e) => {
-    e.preventDefault();
+  const onSubmitChange = async () => {
     const data = {
       description: discription,
       imageUrl: url,
@@ -45,19 +43,28 @@ export const AddPhoto = ({ user }) => {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
-            Authorization: `Bearer ${user.user}`,
+            Authorization: `Bearer ${user}`,
           },
         }
       );
       const result = await response.json();
-      console.log(result);
+      if (result.result === "ok") {
+        return window.location.reload()};
     } catch (error) {
       console.log("Ошибка:", error);
     }
   };
 
+  useEffect(()=>{
+    if(url !== "" && discription !== "") {
+      setDisableButton(false);
+    }else{
+      setDisableButton(true);
+    }
+  }, [url, discription])
+
   return (
-    <form className={s.add_photo}>
+    <div className={s.add_photo}>
       <p className={s.add_photo_text}>Добавить пост</p>
       <input
         className={s.input_img}
@@ -68,6 +75,7 @@ export const AddPhoto = ({ user }) => {
           setFile(e.target.files[0]);
         }}
       />
+      {url && <img className={s.photo} src={url} alt="user_photo" />}
       <input
         className={s.input_description}
         type="text"
@@ -76,9 +84,9 @@ export const AddPhoto = ({ user }) => {
           setDiscription(e.target.value);
         }}
       />
-      <button className={s.button} onClick={() => onSubmitChange()}>
+      <button className={disableButton ? `${s.hidden}` : `${s.button}`} onClick={() => onSubmitChange()} disabled={disableButton}>
         Добавить
       </button>
-    </form>
+    </div>
   );
 };

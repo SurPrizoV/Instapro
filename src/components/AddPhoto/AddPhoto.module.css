@@ -1,5 +1,4 @@
 .add_photo {
-  height: 200px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -26,6 +25,10 @@
   padding: 0 6px;
 }
 
+.photo {
+  width: 140px;
+}
+
 .button {
   padding: 8px;
   margin-top: 8px;
@@ -40,4 +43,8 @@
   transform: scale(1.03);
   background-color: #afafaf;
   box-shadow: 8px 0px 24px #d6d5d5;
+}
+
+.hidden {
+  display: none;
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import s from "./AddPhoto.module.css";
 import { useEffect } from "react";
 
-export const AddPhoto = () => {
+export const AddPhoto = ({user}) => {
   const [file, setFile] = useState("");
   const [discription, setDiscription] = useState('');
   const [url, setUrl] = useState('');
@@ -43,7 +43,7 @@ export const AddPhoto = () => {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
-                "Authorization" : `Bearer ${localStorage.getItem("userToken")}`, 
+                "Authorization" : `Bearer ${user.user}`, 
             }
         });
         const result = await response.json();

@@ -6,7 +6,7 @@ import { Registration } from "../../pages/Registration/Registration";
 import { AddPhoto } from "../AddPhoto/AddPhoto";
 import { IoAddCircleOutline } from "react-icons/io5";
 
-export const Header = ({ setUser }) => {
+export const Header = ({ user, setUser }) => {
   const [modalActive, setModalActive] = useState(false);
   const [registration, setRegistration] = useState(false);
   const [signUp, setSignUp] = useState(
@@ -21,6 +21,7 @@ export const Header = ({ setUser }) => {
 
   const onSignOutChange = () => {
     localStorage.removeItem("userToken");
+    window.location.reload();
     setSignUp(false);
   };
 
@@ -48,7 +49,7 @@ export const Header = ({ setUser }) => {
           setSignUp={setSignUp}
         />
       ) : signUp ? (
-        <AddPhoto />
+        <AddPhoto addPhoto={addPhoto} user={user}/>
       ) : (
         <SignUp
           registration={registration}

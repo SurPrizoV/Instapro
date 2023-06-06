@@ -51,7 +51,7 @@ export const AddPhoto = ({ user }) => {
       if (result.result === "ok") {
         return window.location.reload()};
     } catch (error) {
-      console.log("Ошибка:", error);
+      console.error("Ошибка:", error);
     }
   };
 

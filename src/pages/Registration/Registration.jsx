@@ -8,13 +8,16 @@ export const Registration = ({
   setModalActive,
   setUser,
 }) => {
+  const [file, setFile] = useState("");
   const [login, setLogin] = useState("");
+  const [url, setUrl] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [disableButton, setDisableButton] = useState(true);
 
   const onSignUpChange = async () => {
     const data = {
+      imageUrl: url,
       login: login,
       name: name,
       password: password,
@@ -29,10 +32,34 @@ export const Registration = ({
       localStorage.setItem('userToken', result.user.token);
       signUp ? setSignUp(false) : setSignUp(true);
       setModalActive(false);
+      window.location.reload()
     } catch (error) {
-      console.error("Ошибка:", error);
+      alert("Ошибка:", error);
     }
   };
+
+  const onImageUrlChange = async () => {
+    const data = new FormData();
+    data.append("file", file);
+
+    await fetch(`https://wedev-api.sky.pro/api/upload/image`, {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setUrl(data.fileUrl);
+      })
+      .catch((error) => {
+        console.error("Ошибка:", error);
+      });
+  };
+
+  useEffect(() => {
+    onImageUrlChange();
+  }, [file]);
 
   const onRegistrationChange = () => {
     setRegistration(false);
@@ -51,6 +78,16 @@ export const Registration = ({
       <p className={s.logo}>Instapro</p>
       <div className={s.form}>
         <input
+        className={s.input_img}
+        type="file"
+        accept="image/*"
+        title=" "
+        onChange={(e) => {
+          setFile(e.target.files[0]);
+        }}
+      />
+      {url && <img className={s.photo} src={url} alt="user_photo" />}
+      <input
           className={s.input}
           type="text"
           placeholder="Логин"

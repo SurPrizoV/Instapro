@@ -51,12 +51,27 @@ export const UserItem = (user) => {
     }
   };
 
+  const getPostsById = async(id) => {
+    await fetch (`https://wedev-api.sky.pro/api/v1/prod/instapro/user-posts/${id}`)
+    .then((response)=>{
+      return response.json();
+    })
+    .then((data)=> {
+      setData(data);
+      if (data && data.posts && data.posts.length > 0) {
+        setLiked(data.posts[0].isLiked)};
+    })
+    .catch((error) => {
+      console.error("Ошибка:", error);
+    })
+  }
+
   return (
     <>
       {data.posts &&
         data.posts.map((post) => (
           <div key={post.id} className={s.user}>
-            <div className={s.user_discription}>
+            <div className={s.user_discription} onClick={()=>getPostsById(post.user.id)}>
               <img
                 src={post.user.imageUrl}
                 alt="user_photo"

@@ -8,11 +8,12 @@ export const AddPhoto = ({ user }) => {
   const [url, setUrl] = useState("");
   const [disableButton, setDisableButton] = useState(true);
 
-  const onImageUrlChange = async () => {
+
+  useEffect(() => {
     const data = new FormData();
     data.append("file", file);
 
-    await fetch(`https://wedev-api.sky.pro/api/upload/image`, {
+    fetch(`https://wedev-api.sky.pro/api/upload/image`, {
       method: "POST",
       body: data,
     })
@@ -25,10 +26,6 @@ export const AddPhoto = ({ user }) => {
       .catch((error) => {
         console.error("Ошибка:", error);
       });
-  };
-
-  useEffect(() => {
-    onImageUrlChange();
   }, [file]);
 
   const onSubmitChange = async () => {

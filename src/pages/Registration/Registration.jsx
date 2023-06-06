@@ -38,11 +38,11 @@ export const Registration = ({
     }
   };
 
-  const onImageUrlChange = async () => {
+  useEffect(() => {
     const data = new FormData();
     data.append("file", file);
 
-    await fetch(`https://wedev-api.sky.pro/api/upload/image`, {
+    fetch(`https://wedev-api.sky.pro/api/upload/image`, {
       method: "POST",
       body: data,
     })
@@ -55,10 +55,6 @@ export const Registration = ({
       .catch((error) => {
         console.error("Ошибка:", error);
       });
-  };
-
-  useEffect(() => {
-    onImageUrlChange();
   }, [file]);
 
   const onRegistrationChange = () => {

@@ -4,7 +4,7 @@
 
 ## Демо
 
-    ### https://candid-concha-964011.netlify.app/
+    https://candid-concha-964011.netlify.app/
 
 ## Установка 
 
@@ -12,7 +12,7 @@
 
 1 - Склонируйте репозиторий на свой локальный компьютер. 
    
-   ### git clone https://github.com/SurPrizoV/Instapro
+   git clone https://github.com/SurPrizoV/Instapro
 
 2 - В корневом каталоге репозитория установите зависимости. 
 

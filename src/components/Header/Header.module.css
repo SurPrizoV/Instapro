@@ -13,6 +13,8 @@
   font-family: "Bebas Neue", sans-serif;
   font-size: 32px;
   margin: 0;
+  text-decoration: none;
+  color: black;
 }
 
 .button {

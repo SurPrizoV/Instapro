@@ -4,81 +4,43 @@ import { IoHeartSharp } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import { formatDistance } from "date-fns";
 import { ru } from "date-fns/esm/locale";
+import { Link } from "react-router-dom";
+import { getData, onLikedChange } from "../ApiServes/ApiServes";
+import { postsById } from "../ApiServes/ApiServes";
 
 export const UserItem = (user) => {
   const [liked, setLiked] = useState(false);
   const [data, setData] = useState({ posts: [] });
 
   useEffect(() => {
-    fetch(`https://webdev-hw-api.vercel.app/api/v1/prod/instapro`, {
-      headers: user.user
-        ? {
-            Authorization: `Bearer ${user.user}`,
-          }
-        : {},
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-        if (data && data.posts && data.posts.length > 0) {
-          setLiked(data.posts[0].isLiked);
-        }
-      });
+    getData(user, setData)
   }, [user, liked]);
 
-  const onLikedChange = async (id) => {
-    if (user.user !== "") {
-      try {
-        const responseLike = await fetch(
-          `https://wedev-api.sky.pro/api/v1/prod/instapro/${id}/${
-            liked ? "dislike" : "like"
-          }`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${user.user}`,
-            },
-          }
-        );
-        const result = await responseLike.json();
-        setLiked(result.post.isLiked);
-      } catch (error) {
-        console.error("Ошибка:", error);
-        alert("Вы должны быть авторизованны.");
-      }
-    } else {
-      alert("Вы должны быть авторизованны.");
-    }
+  const handleLikedChange = (id) => {
+    onLikedChange(user, id, liked, setLiked);
   };
 
-  const getPostsById = async(id) => {
-    await fetch (`https://wedev-api.sky.pro/api/v1/prod/instapro/user-posts/${id}`)
-    .then((response)=>{
-      return response.json();
-    })
-    .then((data)=> {
-      setData(data);
-      if (data && data.posts && data.posts.length > 0) {
-        setLiked(data.posts[0].isLiked)};
-    })
-    .catch((error) => {
-      console.error("Ошибка:", error);
-    })
-  }
+  const getPostsById = (id) => {
+    postsById(id, setData);
+  };
 
   return (
     <>
       {data.posts &&
         data.posts.map((post) => (
           <div key={post.id} className={s.user}>
-            <div className={s.user_discription} onClick={()=>getPostsById(post.user.id)}>
+            <Link
+              to={`/user/${post.user.id}`}
+              className={s.user_discription}
+              onClick={() => getPostsById(post.user.id)}
+            >
               <img
                 src={post.user.imageUrl}
                 alt="user_photo"
                 className={s.user_photo}
               />
               <p className={`${s.login} ${s.big}`}>{post.user.login}</p>
-            </div>
+            </Link>
             <img
               className={s.publication}
               src={post.imageUrl}
@@ -86,9 +48,9 @@ export const UserItem = (user) => {
             />
             <div className={s.photo_discription}>
               {post.isLiked ? (
-                <IoHeartSharp onClick={() => onLikedChange(post.id)} />
+                <IoHeartSharp onClick={() => handleLikedChange(post.id)} />
               ) : (
-                <IoHeartOutline onClick={() => onLikedChange(post.id)} />
+                <IoHeartOutline onClick={() => handleLikedChange(post.id)} />
               )}
               {post.likes.length === 0 ? (
                 <p className={s.big}>Нравится : 0</p>

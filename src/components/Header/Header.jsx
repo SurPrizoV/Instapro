@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Modal } from "../Modal/Modal";
 import s from "./Header.module.css";
+import { LogIn } from "../../pages/LogIn/LogIn";
 import { SignUp } from "../../pages/SignUp/SignUp";
-import { Registration } from "../../pages/Registration/Registration";
 import { AddPhoto } from "../AddPhoto/AddPhoto";
 import { IoAddCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export const Header = ({ user, setUser }) => {
   const [modalActive, setModalActive] = useState(false);
-  const [registration, setRegistration] = useState(false);
   const [signUp, setSignUp] = useState(
     localStorage.getItem("userToken") ? true : false
   );
@@ -27,11 +27,11 @@ export const Header = ({ user, setUser }) => {
 
   return (
     <div className={s.header}>
-      <p className={s.logo} onClick={() => window.location.reload()}>
+      <Link className={s.logo} to="/">
         Instapro
-      </p>
-      {signUp && <IoAddCircleOutline onClick={() => onAddPhotoChange()} />}
-      {signUp ? (
+      </Link>
+      {localStorage.getItem("userToken") && <IoAddCircleOutline onClick={() => onAddPhotoChange()} />}
+      {localStorage.getItem("userToken") ? (
         <button className={s.button} onClick={() => onSignOutChange()}>
           Выйти
         </button>
@@ -41,24 +41,19 @@ export const Header = ({ user, setUser }) => {
         </button>
       )}
       <Modal active={modalActive} setActive={setModalActive}>
-        {registration ? (
-          <Registration
+        {signUp ? (
+          <SignUp
             setModalActive={setModalActive}
-            registration={registration}
-            setRegistration={setRegistration}
             setUser={setUser}
             signUp={signUp}
             setSignUp={setSignUp}
           />
-        ) : signUp ? (
+        ) : localStorage.getItem("userToken") ? (
           <AddPhoto addPhoto={addPhoto} user={user} />
         ) : (
-          <SignUp
-            registration={registration}
-            setRegistration={setRegistration}
+          <LogIn
             setModalActive={setModalActive}
             setUser={setUser}
-            signUp={signUp}
             setSignUp={setSignUp}
           />
         )}

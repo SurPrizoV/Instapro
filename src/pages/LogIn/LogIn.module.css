@@ -1,4 +1,5 @@
-.registration {
+.sign_up {
+  height: 200px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -23,20 +24,19 @@
   padding-bottom: 12px;
 }
 
-.input_img {
-  color: transparent;
-  width: 120px;
-}
-
-.photo {
-  width: 140px;
-}
-
 .input {
     border: none;
     border-bottom: 0.3px solid rgb(194, 193, 193);
     outline: none;
     padding: 0 6px;
+}
+
+.none {
+  font-size: 12px;
+}
+
+.button_in {
+  margin-top: 4px;
 }
 
 .button {
@@ -54,17 +54,13 @@
   box-shadow: 8px 0px 24px #d6d5d5;
 }
 
-.acc{
-  font-size: 12px;
-}
-
-.signin {
+.registration {
   text-decoration: underline;
   cursor: pointer;
   transition: 0.5s;
 }
 
-.signin:hover {
+.registration:hover {
   transform: scale(1.03);
 }
 

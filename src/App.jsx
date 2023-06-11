@@ -1,9 +1,9 @@
 import './App.css';
-import { Main } from './pages/Main/Main';
+import { AppRoutes } from './components/Routes/Routes';
 
 function App() {
   return (
-    <Main/>
+    <AppRoutes/>
   );
 }
 

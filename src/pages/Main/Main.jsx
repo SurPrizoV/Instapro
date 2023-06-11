@@ -12,7 +12,7 @@ export const Main = () => {
 
   return (
     <div className={s.main}>
-      <Header setUser={setUser} user={user}/>
+      <Header setUser={setUser} user={user} />
       <UserItem user={user} />
     </div>
   );

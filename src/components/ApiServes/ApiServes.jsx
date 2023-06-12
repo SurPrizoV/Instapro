@@ -66,6 +66,9 @@ export const onLogInChange = async (
       body: JSON.stringify(data),
     });
     const result = await response.json();
+    if (response.status === 400) {
+      alert(result.error);
+    }
     localStorage.setItem("userToken", result.user.token);
     setModalActive(false);
   } catch (error) {
@@ -92,6 +95,9 @@ export const onSignUpChange = async (
       body: JSON.stringify(data),
     });
     const result = await response.json();
+    if (response.status === 400) {
+      alert(result.error);
+    }
     localStorage.setItem("userToken", result.user.token);
     setModalActive(false);
   } catch (error) {

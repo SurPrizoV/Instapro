@@ -6,10 +6,6 @@ export const LogIn = ({ setSignUp, setModalActive }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [disableButton, setDisableButton] = useState(true);
-  
-  const handleLoginChange = () => {
-    onLogInChange(login, password, setModalActive)
-  }
 
   useEffect(() => {
     if (login !== "" && password !== "") {
@@ -41,7 +37,7 @@ export const LogIn = ({ setSignUp, setModalActive }) => {
         />
         <button
           className={disableButton ? `${s.hidden}` : `${s.button_in} ${s.button}`}
-          onClick={() => handleLoginChange()}
+          onClick={() => onLogInChange(login, password, setModalActive)}
           disabled={disableButton}>
             Войти
         </button>

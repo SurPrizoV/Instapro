@@ -13,10 +13,6 @@ export const SignUp = ({
   const [name, setName] = useState("");
   const [disableButton, setDisableButton] = useState(true);
 
-  const handleSignUp = () => {
-    onSignUpChange(url, login, name, password, setModalActive)
-  }
-
   useEffect(() => {
     imageLoader(file, setUrl)
   }, [file]);
@@ -69,7 +65,7 @@ export const SignUp = ({
           className={
             disableButton ? `${s.hidden}` : `${s.button_in} ${s.button}`
           }
-          onClick={() => handleSignUp()}
+          onClick={() => onSignUpChange(url, login, name, password, setModalActive)}
           disabled={disableButton}
         >
           Зарегистрироваться

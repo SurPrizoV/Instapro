@@ -13,11 +13,7 @@ export const AddPhoto = () => {
   useEffect(() => {
     imageLoader(file, setUrl)
   }, [file]);
-
-  const handleSubmit = () => {
-    onSubmitChange(discription, url)
-  }
-
+  
   useEffect(()=>{
     if(url !== "" && discription !== "") {
       setDisableButton(false);
@@ -47,7 +43,7 @@ export const AddPhoto = () => {
           setDiscription(e.target.value);
         }}
       />
-      <button className={disableButton ? `${s.hidden}` : `${s.button}`} onClick={() => handleSubmit()} disabled={disableButton}>
+      <button className={disableButton ? `${s.hidden}` : `${s.button}`} onClick={() => onSubmitChange(discription, url)} disabled={disableButton}>
         Добавить
       </button>
     </div>

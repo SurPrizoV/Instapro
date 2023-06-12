@@ -8,16 +8,16 @@ import { Link } from "react-router-dom";
 import { getData, onLikedChange } from "../ApiServes/ApiServes";
 import { postsById } from "../ApiServes/ApiServes";
 
-export const UserItem = (user) => {
+export const UserItem = () => {
   const [liked, setLiked] = useState(false);
   const [data, setData] = useState({ posts: [] });
 
   useEffect(() => {
-    getData(user, setData)
-  }, [user, liked]);
+    getData(setData)
+  }, [liked]);
 
   const handleLikedChange = (id) => {
-    onLikedChange(user, id, liked, setLiked);
+    onLikedChange(id, liked, setLiked);
   };
 
   const getPostsById = (id) => {

@@ -3,7 +3,7 @@ import s from "./AddPhoto.module.css";
 import { useEffect } from "react";
 import { imageLoader, onSubmitChange } from "../ApiServes/ApiServes";
 
-export const AddPhoto = ({ user }) => {
+export const AddPhoto = () => {
   const [file, setFile] = useState("");
   const [discription, setDiscription] = useState("");
   const [url, setUrl] = useState("");
@@ -15,7 +15,7 @@ export const AddPhoto = ({ user }) => {
   }, [file]);
 
   const handleSubmit = () => {
-    onSubmitChange(discription, url, user)
+    onSubmitChange(discription, url)
   }
 
   useEffect(()=>{

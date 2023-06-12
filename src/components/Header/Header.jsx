@@ -7,7 +7,7 @@ import { AddPhoto } from "../AddPhoto/AddPhoto";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-export const Header = ({ user, setUser }) => {
+export const Header = () => {
   const [modalActive, setModalActive] = useState(false);
   const [signUp, setSignUp] = useState(
     localStorage.getItem("userToken") ? true : false
@@ -41,19 +41,16 @@ export const Header = ({ user, setUser }) => {
         </button>
       )}
       <Modal active={modalActive} setActive={setModalActive}>
-        {signUp ? (
+        {addPhoto ? (
+          <AddPhoto addPhoto={addPhoto} />
+        ) : signUp ? (
           <SignUp
             setModalActive={setModalActive}
-            setUser={setUser}
-            signUp={signUp}
             setSignUp={setSignUp}
           />
-        ) : localStorage.getItem("userToken") ? (
-          <AddPhoto addPhoto={addPhoto} user={user} />
         ) : (
           <LogIn
             setModalActive={setModalActive}
-            setUser={setUser}
             setSignUp={setSignUp}
           />
         )}

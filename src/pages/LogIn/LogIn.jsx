@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import s from "./LogIn.module.css";
 import { onLogInChange } from "../../components/ApiServes/ApiServes";
 
-export const LogIn = ({ setSignUp, setModalActive, setUser }) => {
+export const LogIn = ({ setSignUp, setModalActive }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [disableButton, setDisableButton] = useState(true);
   
   const handleLoginChange = () => {
-    onLogInChange(login, password, setUser, setModalActive)
+    onLogInChange(login, password, setModalActive)
   }
 
   useEffect(() => {

@@ -3,10 +3,8 @@ import s from "./SignUp.module.css";
 import { imageLoader, onSignUpChange } from "../../components/ApiServes/ApiServes";
 
 export const SignUp = ({
-  signUp,
   setSignUp,
   setModalActive,
-  setUser,
 }) => {
   const [file, setFile] = useState("");
   const [login, setLogin] = useState("");
@@ -16,7 +14,7 @@ export const SignUp = ({
   const [disableButton, setDisableButton] = useState(true);
 
   const handleSignUp = () => {
-    onSignUpChange(url, login, name, password, setUser, setModalActive)
+    onSignUpChange(url, login, name, password, setModalActive)
   }
 
   useEffect(() => {
